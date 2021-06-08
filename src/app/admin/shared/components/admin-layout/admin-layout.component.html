@@ -7,7 +7,7 @@
       <a [routerLink]="['/admin', 'comments']"> Главная</a>
     </li>
     <li  routerLinkActive="active">
-      <a href="#" (click)="logout($event)">Выйти</a>
+      <a [routerLink]="['/admin','login']" href="#" (click)="logout($event)" >Выйти</a>
     </li>
   </ul>
 </nav>

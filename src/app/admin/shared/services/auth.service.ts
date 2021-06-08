@@ -3,14 +3,17 @@ import { User } from "../../../shared/interfaces";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http"
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from 'rxjs/operators';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn:'root'
 })
 export class AuthService{
-  errorFlag : boolean = false;
   private token:string = '';
-  constructor(private http: HttpClient){
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ){
   }
   register(user: User): Observable<User>{
     return this.http.post<User>('https://guest-book.naveksoft.com/api/v1/auth/register', user)
@@ -31,6 +34,7 @@ export class AuthService{
 
   private handleError(error:HttpErrorResponse){
     const {message} = error.error
+    console.log(message)
       return throwError(error)
 
   }
@@ -49,6 +53,7 @@ export class AuthService{
   logout(){
     this.setToken('')
     localStorage.clear();
+    // this.router.navigate(['/admin','login'])
   }
 }
 
