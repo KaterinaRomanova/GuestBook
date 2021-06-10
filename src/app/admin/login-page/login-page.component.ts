@@ -1,4 +1,4 @@
-import { AuthService } from './../shared/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../shared/interfaces'
@@ -12,6 +12,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router'
 export class LoginPageComponent implements OnInit {
   form!: FormGroup ;
   message!:string;
+
   constructor(
     private auth: AuthService,
     private router:Router,
@@ -51,6 +52,9 @@ export class LoginPageComponent implements OnInit {
     this.auth.login(user).subscribe(()=>{
       this.form.reset()
       this.router.navigate(['/admin','comments'])
+    }, error => {
+      console.error(error);
+      this.message= error.error.message
     })
   }
 

@@ -9,6 +9,8 @@ import { Router } from "@angular/router";
   providedIn:'root'
 })
 export class AuthService{
+  errorMessage:string = '';
+
   private token:string = '';
   constructor(
     private http: HttpClient,
@@ -28,15 +30,10 @@ export class AuthService{
           this.setToken(token)
         }
       ),
-      catchError(this.handleError.bind(this))
+      catchError((error)=>{
+        return throwError(error)
+      })
     )
-  }
-
-  private handleError(error:HttpErrorResponse){
-    const {message} = error.error
-    console.log(message)
-      return throwError(error)
-
   }
 
   setToken(token: string){
@@ -53,7 +50,6 @@ export class AuthService{
   logout(){
     this.setToken('')
     localStorage.clear();
-    // this.router.navigate(['/admin','login'])
   }
 }
 
