@@ -70,7 +70,8 @@ img {
 .card {
   padding: 1rem;
   border: #ccc 1px dotted;
-  margin: 0.7rem 0;
+  margin: auto;
+  max-width: 500px;
 
   &-header {
     display: flex;
@@ -224,11 +225,19 @@ img {
     color: var(--primary-color);
   }
 }
+input[type='file']{
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+}
 
 input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='date'],
+input[type='confirmPassword'],
+
 select,
 textarea {
   display: block;
@@ -269,8 +278,9 @@ table th {
   margin-bottom: 1rem;
 
   &.main {
-    justify-content: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--dark-color);
+    background: rgb(109, 107, 107);
   }
 
   ul {

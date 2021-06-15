@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { User } from "../../../shared/interfaces";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http"
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from "@angular/router";
+import { User } from "src/app/shared/interfaces";
 
 @Injectable({
   providedIn:'root'
@@ -18,7 +18,9 @@ export class AuthService{
     ){
   }
   register(user: User): Observable<User>{
+    console.log(user)
     return this.http.post<User>('https://guest-book.naveksoft.com/api/v1/auth/register', user)
+    
   }
 
   login(user: User): Observable<{token: string}>{

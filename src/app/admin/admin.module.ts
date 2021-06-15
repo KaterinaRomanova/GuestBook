@@ -1,3 +1,4 @@
+import { CreatePageComponent } from './create-page/create-page.component';
 import { AuthGuard } from './shared/services/auth.guard';
 import { ShareModule } from './../shared/components/shared.module';
 import { RouterModule } from '@angular/router';
@@ -14,7 +15,8 @@ import { AuthService } from './shared/services/auth.service';
   declarations: [
     AdminLayoutComponent,
     LoginPageComponent,
-    CommentsPageComponent
+    CommentsPageComponent,
+    CreatePageComponent
   ],
   exports: [RouterModule],
   imports: [

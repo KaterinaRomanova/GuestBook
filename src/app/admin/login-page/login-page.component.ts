@@ -34,7 +34,7 @@ export class LoginPageComponent implements OnInit {
       ]),
       password: new FormControl(null,[
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(8),
         Validators.maxLength(255)
       ])
     })
@@ -49,7 +49,8 @@ export class LoginPageComponent implements OnInit {
       password: this.form.value.password
     }
 
-    this.auth.login(user).subscribe(()=>{
+    this.auth.login(user).subscribe((us)=>{
+      console.log(JSON.stringify(us));
       this.form.reset()
       this.router.navigate(['/admin','comments'])
     }, error => {
