@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="post">
+    <img *ngIf="postInfo.user!.email === emailCurrentUser" class="icon delete" src="../../../../assets/delete.png" (click)="delete(postInfo.id)" alt="" >
+    <div class="post-info layout">
+      <app-user *ngIf="postInfo.user" [user]="postInfo.user"></app-user>
+      <div>
+        <h2>{{ postInfo.title }}</h2>
+        <p>{{ postInfo.message }}</p>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-dark" (click)="showComments(postInfo.id)">
+    <small *ngIf ='!isShow'>Посмотреть комментарии</small>
+    <small *ngIf ='isShow'>Скрыть комментарии</small>
+  </button>
+  <section class="comment" *ngIf ='isShow' >
+    <app-create-comment *ngIf="postInfo.user!.email === emailCurrentUser" [idPost]= 'this.postInfo.id' [comments]= 'this.comments'></app-create-comment>
+    <small *ngIf="this.comments.length === 0"> Пока нет ни одного комментария</small>
+    <div class="card" *ngFor="let comment of this.comments">
+      <img *ngIf="postInfo.user!.email === emailCurrentUser" class="icon delete" src="../../../../assets/delete.png" alt="" (click)="delete(postInfo.id,comment.id)">
+      <div class="comment-info layout">
+        <app-user *ngIf="comment.user" [user]="comment.user"></app-user>
+          <p>{{comment.message}}</p>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,30 +1,35 @@
-import { LoginPageComponent } from './admin/login-page/login-page.component';
+import { PostService } from 'src/app/shared/services/post.service';
+import { CommentService } from 'src/app/shared/services/comment.service';
+import { AuthService } from '../app/shared/services/auth.service';
+import { LoginPageComponent } from './shared/components/login-page/login-page.component'
 import { HomePageComponent } from './home-page/home-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminModule} from './admin/admin.module'
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { AuthGuard } from './admin/shared/services/auth.guard';
+import { AuthGuard } from '../app/shared/services/auth.guard';
+
+
 
 const routes: Routes = [
   {
-    path:'admin', loadChildren:'./admin/admin.module#AdminModule'
+    path: 'admin',loadChildren: () => import('src/app/admin/admin.module').then(m => m.AdminModule)
   },
   {
     path:'', component: MainLayoutComponent, children:[
       {path:'', redirectTo:'/login', pathMatch:'full'},
-      {path:'home', component: HomePageComponent},
       {path:'login', component: LoginPageComponent},
       {path:'register', component: RegisterPageComponent},
-      ]
+      {path:'home', component: HomePageComponent, canActivate:[AuthGuard]},
+      {path:'**', redirectTo:'/home', pathMatch:'full'}
+    ]
   }
-
 ];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[AuthGuard, AuthService, CommentService, PostService]
 })
 export class AppRoutingModule { }

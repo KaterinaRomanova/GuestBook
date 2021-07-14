@@ -112,6 +112,7 @@ img {
 }
 
 .btn-link {
+  background-color: transparent;
   background: none;
   padding: 0;
   margin: 0;
@@ -225,6 +226,12 @@ img {
     color: var(--primary-color);
   }
 }
+
+.icon{
+  width: 20px;
+  cursor: pointer;
+}
+
 input[type='file']{
   display: block;
   width: 100%;
@@ -288,7 +295,7 @@ table th {
   }
 
   li.active a {
-    color: var(--dark-color);
+    color: rgb(179, 178, 178);
     font-weight: bold;
     cursor: default;
   }
@@ -303,3 +310,9 @@ table th {
     }
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+

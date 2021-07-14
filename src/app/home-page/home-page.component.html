@@ -1,6 +1,5 @@
-<div class="comments">
-  <app-comments></app-comments>
-  <app-comments></app-comments>
-  <app-comments></app-comments>
+<app-create-post [posts]="posts"></app-create-post>
+<div class="posts" *ngFor="let post of posts">
+  <app-post [postInfo]="post" [posts]="posts" (filteredPosts)="filterPost($event)"></app-post>
 </div>
 

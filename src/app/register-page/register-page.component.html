@@ -79,9 +79,8 @@
   <div class="form-control"
     [ngClass]="{invalid: form.get('file')!.invalid}"
   >
-
     <label for="file">Загрузить фото профиля:</label>
-    <input type="file" id="file" formControlName="file" accept="image/jpeg,image/png,image/bmp">
+    <input type="file" id="file" formControlName="file" accept="image/jpeg,image/png,image/bmp" (change)="onFileChanged($event)">
     <div
       *ngIf="form.get('file')!.touched && form.get('file')!.invalid"
       class="validation"

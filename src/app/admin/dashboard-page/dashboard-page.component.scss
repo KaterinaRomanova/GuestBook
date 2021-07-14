@@ -1,0 +1,21 @@
+th, td{
+  text-align: center;
+}
+
+table tr:nth-child(2n){
+  background-color:rgba(216, 51, 51, 0.13);
+}
+td>*{
+  vertical-align:inherit;
+}
+.btn{
+  font-size: 12px;
+  border: 1px solid rgba(216, 51, 51, 0.13);;
+}
+
+td{
+  word-wrap: break-word;
+  max-width: 132px;
+}
+
+@import '~bootstrap/scss/bootstrap';

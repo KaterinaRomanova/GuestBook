@@ -7,7 +7,7 @@
       <a [routerLink]="['/home']"> Главная</a>
     </li>
     <li *ngIf="auth.isAuthenticated()" routerLinkActive="active">
-      <a [routerLink]="['/login']" href="#" >Выход</a>
+      <a [routerLink]="['/login']" href="#" (click)="logout()">Выход</a>
     </li>
     <li *ngIf="!auth.isAuthenticated()" routerLinkActive="active">
       <a [routerLink]="['/login']" href="#" >Вход</a>

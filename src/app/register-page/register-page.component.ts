@@ -1,11 +1,9 @@
 
-import { AuthService } from '../admin/shared/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../shared/interfaces'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { MustMatch } from '../my.validators';
-import { password } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-register-page',
@@ -15,6 +13,7 @@ import { password } from '@rxweb/reactive-form-validators';
 export class RegisterPageComponent implements OnInit {
   form!: FormGroup ;
   message!:string;
+  selectedFile!: File | null;
 
   constructor(
     private auth: AuthService,
@@ -26,6 +25,7 @@ export class RegisterPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe((params:Params)=>{
       if(params['loginAgain']){
         this.message="Введите данные"
@@ -60,19 +60,24 @@ export class RegisterPageComponent implements OnInit {
   }
 
 
+  onFileChanged(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
 
   submit(){
     if(this.form.invalid){
       return
     }
-    const user: User={
-      email: this.form.value.email,
-      password: this.form.value.password,
-      name: this.form.value.name,
-      password_confirmation: this.form.value.confirmPassword,
-      file: this.form.value.file
+    const fd = new FormData();
+    fd.append('name', this.form.value.name);
+    fd.append('password_confirmation', this.form.value.confirmPassword);
+    fd.append('email', this.form.value.email);
+    fd.append('password', this.form.value.password);
+    if(this.selectedFile !==null){
+      fd.append('avatar', this.selectedFile, this.selectedFile.name);
     }
-    this.auth.register(user).subscribe(()=>{
+
+    this.auth.register(fd).subscribe(()=>{
       this.form.reset();
       this.router.navigate(['/home'])
     }, error => {

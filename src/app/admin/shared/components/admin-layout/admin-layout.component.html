@@ -1,10 +1,10 @@
 <nav class="navbar bg-primary">
   <h1>
-    <a routerLink="/">Guest Book Admin</a>
+    <a routerLink="/admin">Guest Book Admin</a>
   </h1>
   <ul *ngIf="auth.isAuthenticated()">
     <li routerLinkActive="active">
-      <a [routerLink]="['/admin', 'comments']"> Главная</a>
+      <a [routerLink]="['/admin', 'home']"> Главная</a>
     </li>
     <li  routerLinkActive="active">
       <a [routerLink]="['/admin','login']" href="#" (click)="logout()" >Выйти</a>
